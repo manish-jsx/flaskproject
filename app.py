@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT', 10000))  # Adjusted the default port
 
 @app.route('/')
 def index():
@@ -17,7 +17,7 @@ def index():
 
 @app.route('/graph')
 def graph():
-     # Load CSV data
+    # Load CSV data
     data = pd.read_csv('graph.csv')
     
     # Create a plotly figure
@@ -27,4 +27,4 @@ def graph():
     return render_template('graph.html', graph=graph_html)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+    app.run()  # Removed the host and port parameters
