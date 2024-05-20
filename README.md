@@ -5,8 +5,11 @@
 This is a simple Flask web application that reads data from a CSV file and displays it in a table format on the homepage. Additionally, it provides a bar graph visualization of the data on a separate page using Plotly.
 
 # Screenshots
+<div style="text-align: center;">
+<img src="/screenshots/data_graph.png" alt="Graph" width="300"/>  <img src="/screenshots/data_table.png" alt="Table" width="300"/>
+</div>
 
-![Graph](/screenshots/data_graph.png) | ![Table](/screenshots/data_table.png)
+
 
 
 ## Project Structure
