@@ -4,6 +4,8 @@ import plotly.express as px
 
 app = Flask(__name__)
 
+port = int(os.environ.get('PORT', 5000))
+
 @app.route('/')
 def index():
     # Load CSV data
@@ -24,4 +26,4 @@ def graph():
     return render_template('graph.html', graph=graph_html)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port)
