@@ -27,4 +27,4 @@ def graph():
     return render_template('graph.html', graph=graph_html)
 
 if __name__ == '__main__':
-    app.run()  # Removed the host and port parameters
+    app.run()
