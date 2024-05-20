@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Graph - My Flask App{% endblock %}
+
+{% block content %}
+<h1 class="text-center">CSV Data Graph</h1>
+<div class="mt-5">
+    {{ graph|safe }}
+</div>
+<div class="text-center mt-3">
+    <a href="{{ url_for('index') }}" class="btn btn-primary">View Data Table</a>
+</div>
+{% endblock %}
