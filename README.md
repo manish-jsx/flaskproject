@@ -1,27 +1,34 @@
 
-
 # Flask Data Visualization App
 
 This is a simple Flask web application that reads data from a CSV file and displays it in a table format on the homepage. Additionally, it provides a bar graph visualization of the data on a separate page using Plotly.
 
-# Screenshots
+## Screenshots
+
 <div style="text-align: center;">
-<img src="/screenshots/data_graph.png" alt="Graph" width="300"/>  <img src="/screenshots/data_table.png" alt="Table" width="300"/>
+    <img src="/screenshots/data_graph.png" alt="Graph" width="300"/>  
+    <img src="/screenshots/data_table.png" alt="Table" width="300"/>
 </div>
-
-
-
 
 ## Project Structure
 
 ```
 myproject/
-├── app.py
-├── graph.data.csv
-├── templates/
-│   ├── base.html
-│   ├── index.html
-│   └── graph.html
+├── README.md
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── graph.html
+│   │   └── index.html
+│   └── wsgi.py
+├── data.csv
+├── graph.csv
+├── requirements.txt
+├── screenshots/
+│   ├── data_graph.png
+│   └── data_table.png
 └── static/
     └── css/
         └── styles.css
@@ -50,7 +57,7 @@ myproject/
 
 3. **Install the dependencies:**
     ```bash
-    pip install Flask pandas plotly
+    pip install -r requirements.txt
     ```
 
 ## Usage
@@ -76,22 +83,22 @@ myproject/
 
 - Displays a bar graph visualization of the data using Plotly.
 
-## Data File
+## Data Files
 
-The application reads data from `graph.data.csv`. Make sure your CSV file is structured correctly. Here's an example structure for `graph.data.csv`:
+The application reads data from `data.csv` and `graph.csv`. Make sure your CSV files are structured correctly. Here's an example structure for `graph.csv`:
 
 ```csv
-Name,Age,Country,Score
-Alice,30,USA,85
-Bob,25,Canada,90
-Charlie,35,UK,78
-David,28,Australia,88
-Eve,22,India,92
-Frank,33,Germany,75
-Grace,27,Japan,80
-Hannah,31,China,95
-Ian,29,France,82
-Judy,26,Brazil,87
+Country,Score
+USA,85
+Canada,90
+UK,78
+Australia,88
+India,92
+Germany,75
+Japan,80
+China,95
+France,82
+Brazil,87
 ```
 
 ## Templates
@@ -104,7 +111,91 @@ Judy,26,Brazil,87
 
 - `styles.css`: Custom styles for the application.
 
-## License
+## Deployment on Render
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+To deploy this application on Render, follow these steps:
 
+1. **Create a `requirements.txt` file:**
+    ```bash
+    pip freeze > requirements.txt
+    ```
+
+2. **Create a `render.yaml` file** in the root of your project:
+    ```yaml
+    services:
+      - type: web
+        name: my-flask-app
+        env: python
+        region: oregon
+        plan: free
+        buildCommand: ""
+        startCommand: gunicorn app.wsgi:app
+    ```
+
+3. **Push your code to a GitHub repository.**
+
+4. **Create a new Web Service on Render:**
+    - Go to [Render](https://render.com/).
+    - Click on the "New" button and select "Web Service".
+    - Connect your GitHub repository.
+    - Use the settings from your `render.yaml` file.
+
+5. **Deploy the service.**
+
+6. **Access your deployed application.**
+
+
+
+
+
+### Updated Code Files
+
+#### `app/main.py`
+
+```python
+from flask import Flask, render_template
+import pandas as pd
+import plotly.express as px
+import os
+
+app = Flask(__name__)
+
+port = int(os.environ.get('PORT', 10000))  # Adjusted the default port
+
+@app.route('/')
+def index():
+    # Load CSV data
+    data = pd.read_csv('data.csv')
+    # Convert to HTML table
+    data_html = data.to_html(classes='table table-striped', index=False)
+    return render_template('index.html', data=data_html)
+
+@app.route('/graph')
+def graph():
+    # Load CSV data
+    data = pd.read_csv('graph.csv')
+    
+    # Create a plotly figure
+    fig = px.bar(data, x='Country', y='Score', title='Sample Data Visualization')
+    graph_html = fig.to_html(full_html=False)
+    
+    return render_template('graph.html', graph=graph_html)
+
+if __name__ == '__main__':
+    app.run()
+```
+
+#### `app/wsgi.py`
+
+```python
+from app.main import app
+
+if __name__ == "__main__":
+    app.run()
+```
+
+#### `app/__init__.py`
+
+```python
+# This file is intentionally left blank.
+```
