@@ -64,7 +64,7 @@ myproject/
 
 1. **Run the Flask application:**
     ```bash
-    flask run
+    gunicorn app.wsgi:app
     ```
 
 2. **Open your web browser and navigate to:**

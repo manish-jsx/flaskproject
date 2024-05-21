@@ -1,2 +1,40 @@
-.flask
-*__pycache__
+# Byte-compiled / optimized Python files
+__pycache__/
+*.pyc
+
+# Environment folder
+venv/
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Static files
+/static/assets/
+
+# Environment variables file
+.env
+
+# IDE specific files
+.vscode/
+*.swp
+.DS_Store
+
+# Other
+*.bak
+*.csv
+*.db
+*.ini
+*.lock
+*.pyc
+*.sqlite
+*.txt
+*.xlsx
