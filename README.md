@@ -123,13 +123,15 @@ To deploy this application on Render, follow these steps:
 2. **Create a `render.yaml` file** in the root of your project:
     ```yaml
     services:
-      - type: web
+    - type: web
         name: my-flask-app
         env: python
         region: oregon
         plan: free
-        buildCommand: ""
+        buildCommand: pip install -r requirements.txt
         startCommand: gunicorn app.wsgi:app
+
+
     ```
 
 3. **Push your code to a GitHub repository.**
