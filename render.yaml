@@ -4,5 +4,6 @@ services:
     env: python
     region: oregon
     plan: free
-    buildCommand: ""
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app.wsgi:app
+
