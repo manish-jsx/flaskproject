@@ -138,7 +138,7 @@ To deploy this application on Render, follow these steps:
 
 4. **Create a new Web Service on Render:**
     - Go to [Render](https://render.com/).
-    - Click on the "New" button and select "Web Service".
+    - Click on the "New" button and select "Blueprint".
     - Connect your GitHub repository.
     - Use the settings from your `render.yaml` file.
 
