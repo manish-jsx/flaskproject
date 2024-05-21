@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: my-flask-app
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: ""
+    startCommand: gunicorn app.wsgi:app
