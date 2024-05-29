@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Projects - My Flask App
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Projects</h1>
+    <div class="container mt-5">
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        <a href="{{ url_for('project_detail', id=project.id) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
