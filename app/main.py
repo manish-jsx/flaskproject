@@ -16,7 +16,7 @@ projects = [
 ]
 
 # Load the pre-trained model
-model_path = './model.pkl'
+model_path = '/static/model/model.pkl'
 if os.path.exists(model_path):
     with open(model_path, 'rb') as model_file:
         model = pickle.load(model_file)
