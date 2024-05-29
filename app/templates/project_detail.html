@@ -1,0 +1,24 @@
+<!-- templates/project_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}
+    {{ project.title }} - My Flask App
+{% endblock %}
+
+{% block content %}
+    <h1>{{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+
+    <h2>Enter Student Details</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="if">Interview Feedback (IF):</label>
+            <input type="text" id="if" name="if" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="cgpa">CGPA:</label>
+            <input type="text" id="cgpa" name="cgpa" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict Placement</button>
+    </form>
+{% endblock %}
